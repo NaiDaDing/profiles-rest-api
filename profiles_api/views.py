@@ -4,6 +4,8 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import filters
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.settings import api_settings
 
 from profiles_api import serializers
 from profiles_api import models
@@ -99,3 +101,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.UpdateOwnProfile, )
     filter_backends = (filters.SearchFilter, ) # user could do searching via id or email
     search_fields = ('name', 'email', ) # Allow user search for these two items
+
+
+class UserLoginApiView(ObtainAuthToken): # We have to override it to let it become browsable
+    """Handle creating user authentication tokens"""
+    renderer_classer = api_settings.DEFAULT_RENDERER_CLASSES # Enable this class in the Django admin, ObtainAuthToken doesn't has it by default
