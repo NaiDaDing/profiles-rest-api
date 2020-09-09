@@ -105,4 +105,4 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
 class UserLoginApiView(ObtainAuthToken): # We have to override it to let it become browsable
     """Handle creating user authentication tokens"""
-    renderer_classer = api_settings.DEFAULT_RENDERER_CLASSES # Enable this class in the Django admin, ObtainAuthToken doesn't has it by default
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES # Enable this class in the Django admin, ObtainAuthToken doesn't has it by default
